@@ -1,0 +1,21 @@
+{
+  "name": "Bridge — Conflict Resolution Platform",
+  "short_name": "Bridge",
+  "description": "Digitale Plattform für Konfliktbegleitung, Mediation und Teamkoordination.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#081225",
+  "theme_color": "#081225",
+  "icons": [
+    {
+      "src": "public/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "public/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

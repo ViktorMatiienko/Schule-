@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Bridge — Konflikte in Entwicklung verwandeln</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="public/icon-192.png" />
+  <link rel="apple-touch-icon" href="public/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="firebase-config.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <div class="app-shell">
+    <div id="pwa-toast" class="pwa-toast hidden glass">
+      <span>Eine neue Version ist verfügbar.</span>
+      <button id="reload-app" class="small-btn">Aktualisieren</button>
+    </div>
+
+    <header class="topbar glass">
+      <div class="brand-lockup">
+        <div class="brand-mark">B</div>
+        <div>
+          <strong>Bridge</strong>
+          <p>Conflict Resolution & Team Mediation</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span id="mode-pill" class="mode-pill">Cloud Ready</span>
+        <button id="install-app" class="ghost-button">App installieren</button>
+      </div>
+    </header>
+
+    <section class="hero glass">
+      <div class="hero-copy">
+        <span class="eyebrow-pill">Für Schulen, Teams und Organisationen</span>
+        <h1>Konflikte früh sehen. Klar führen. Nachhaltig lösen.</h1>
+        <p>
+          Bridge verbindet Terminbuchung, Fallmanagement, Mediation, Teamkommunikation,
+          Dokumentation und Rollensteuerung in einem ruhigen, modernen System.
+        </p>
+        <div class="hero-actions">
+          <button data-tab-target="request">Termin buchen</button>
+          <button data-tab-target="workspace" class="ghost-button">Workspace öffnen</button>
+        </div>
+        <div class="hero-metrics">
+          <article><strong id="hero-open-count">0</strong><span>offene Fälle</span></article>
+          <article><strong id="hero-booking-count">0</strong><span>Anfragen insgesamt</span></article>
+          <article><strong id="hero-resolution-rate">0%</strong><span>Lösungsquote</span></article>
+          <article><strong id="hero-team-count">3</strong><span>Standardrollen</span></article>
+        </div>
+      </div>
+      <div class="hero-preview glass-inner">
+        <div class="preview-card active-preview">
+          <div class="preview-row">
+            <span class="mini-pill">Live Überblick</span>
+            <span class="mini-pill success">Klarer Statusfluss</span>
+          </div>
+          <h2>Ein System, das Vertrauen schafft.</h2>
+          <ul class="preview-list">
+            <li>strukturierte Fälle mit Verlauf, Priorität und Verantwortlichen</li>
+            <li>Kalender für Termine, Raumplanung und Pausenfenster</li>
+            <li>saubere Übergabe zwischen Admin, Lehrkraft und Mediator</li>
+            <li>sofort verständliche Oberfläche für den Schulalltag</li>
+          </ul>
+          <div class="preview-kpis">
+            <div><span>Raum</span><strong>008</strong></div>
+            <div><span>Notizen</span><strong>Live</strong></div>
+            <div><span>Export</span><strong>PDF</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="nav-tabs glass">
+      <button class="active" data-tab-target="home">Vorteile</button>
+      <button data-tab-target="gallery">Team</button>
+      <button data-tab-target="request">Termin</button>
+      <button data-tab-target="workspace">Workspace</button>
+    </nav>
+
+    <div id="notice" class="notice hidden glass"></div>
+
+    <main>
+      <section id="tab-home" class="tab-section active">
+        <div class="panel-grid">
+          <article class="feature-panel glass">
+            <span class="section-kicker">Warum es wirkt</span>
+            <h2>Konflikte werden sichtbar gemacht, statt verdrängt zu werden.</h2>
+            <p>
+              Gute Teams und starke Schulen wachsen durch klare Prozesse, faire Moderation und eine nachvollziehbare Dokumentation.
+              Bridge gibt Lehrkräften Ruhe, Teams Orientierung und Betroffenen einen geschützten Weg zur Lösung.
+            </p>
+          </article>
+          <article class="feature-panel glass emphasis">
+            <span class="section-kicker">Nutzen für Lehrkräfte</span>
+            <ul class="clean-list">
+              <li>weniger Zuruf, weniger Papier, weniger Missverständnisse</li>
+              <li>saubere Zuständigkeiten und klare Übergaben</li>
+              <li>moderner Auftritt für Streitschlichter und Mediation</li>
+              <li>Dokumentation ohne technische Überforderung</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="cards-grid three">
+          <article class="info-card glass">
+            <h3>Klarheit</h3>
+            <p>Jede Anfrage wird als strukturierter Fall mit Status, Verlauf, Termin und Verantwortlichen sichtbar.</p>
+          </article>
+          <article class="info-card glass">
+            <h3>Entlastung</h3>
+            <p>Lehrkräfte sehen sofort, was neu ist, was eskaliert und welche Schritte schon dokumentiert wurden.</p>
+          </article>
+          <article class="info-card glass">
+            <h3>Vertrauen</h3>
+            <p>Schülerinnen, Schüler und Mitarbeitende erleben einen professionellen, ruhigen und nachvollziehbaren Prozess.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tab-gallery" class="tab-section">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Team Galerie</span>
+            <h2>Menschen schaffen Vertrauen</h2>
+          </div>
+        </div>
+        <div id="gallery-grid" class="gallery-grid"></div>
+      </section>
+
+      <section id="tab-request" class="tab-section">
+        <div class="request-layout">
+          <form id="booking-form" class="glass form-card stack">
+            <div>
+              <span class="section-kicker">Neue Anfrage</span>
+              <h2>Termin oder Fall anlegen</h2>
+            </div>
+            <div class="field-grid two">
+              <label>
+                <span>Vollständiger Name</span>
+                <input name="fullName" placeholder="Max Mustermann" required />
+              </label>
+              <label>
+                <span>Klasse / Team</span>
+                <input name="className" placeholder="6b / Team A" required />
+              </label>
+            </div>
+            <div class="field-grid three">
+              <label>
+                <span>Datum</span>
+                <input type="date" name="appointmentDate" required />
+              </label>
+              <label>
+                <span>Zeitslot</span>
+                <select name="breakSlot">
+                  <option>1. Pause</option>
+                  <option>2. Pause</option>
+                  <option>Nach dem Unterricht</option>
+                </select>
+              </label>
+              <label>
+                <span>Priorität</span>
+                <select name="priority">
+                  <option value="medium">Mittel</option>
+                  <option value="high">Hoch</option>
+                  <option value="low">Niedrig</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              <span>Kategorie</span>
+              <select name="category">
+                <option>Konflikt</option>
+                <option>Beratung</option>
+                <option>Mediation</option>
+                <option>Teamthema</option>
+              </select>
+            </label>
+            <label>
+              <span>Worum geht es kurz?</span>
+              <textarea name="concern" rows="5" placeholder="Kurze Beschreibung des Anliegens" required></textarea>
+            </label>
+            <button type="submit">Absenden</button>
+          </form>
+
+          <aside class="glass side-card">
+            <span class="section-kicker">So läuft es ab</span>
+            <h3>Von der Anfrage bis zur Lösung</h3>
+            <ol class="steps-list">
+              <li>Anfrage wird eingereicht und erscheint sofort im Workspace</li>
+              <li>Verantwortliche Person übernimmt den Fall</li>
+              <li>Termin, Notizen und Maßnahmen bleiben nachvollziehbar</li>
+              <li>Am Ende entsteht ein sauberer, dokumentierter Abschluss</li>
+            </ol>
+            <div class="mini-note">Treffpunkt standardmäßig: <strong>Raum 008</strong></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="tab-workspace" class="tab-section">
+        <div id="workspace-locked" class="glass locked-card">
+          <span class="section-kicker">Sicherer Bereich</span>
+          <h2>Workspace Login</h2>
+          <p>Admin, Lehrkräfte und Mediatorinnen arbeiten im selben System mit unterschiedlichen Rechten.</p>
+          <form id="admin-login-form" class="stack login-form">
+            <label>
+              <span>E-Mail</span>
+              <input type="email" name="email" placeholder="admin@example.com" required />
+            </label>
+            <label>
+              <span>Passwort</span>
+              <input type="password" name="password" placeholder="••••••••" required />
+            </label>
+            <button type="submit">Einloggen</button>
+            <small id="admin-login-help">Im lokalen Modus stehen Standardkonten bereit. Für Live-Betrieb folgen Sie der Schritt-für-Schritt-Anleitung im README und in den Firebase-Dateien.</small>
+          </form>
+        </div>
+
+        <div id="workspace-app" class="workspace hidden">
+          <section class="workspace-header glass">
+            <div>
+              <span class="section-kicker">Workspace</span>
+              <h2>Steuerzentrale für Fälle, Team und Planung</h2>
+            </div>
+            <div class="workspace-header-actions">
+              <div id="current-role-pill" class="role-pill">Rolle: Admin</div>
+              <button id="logout-button" class="ghost-button">Abmelden</button>
+            </div>
+          </section>
+
+          <nav class="workspace-nav glass">
+            <button class="active" data-workspace-view="overview">Übersicht</button>
+            <button data-workspace-view="cases">Fälle</button>
+            <button data-workspace-view="calendar">Kalender</button>
+            <button data-workspace-view="team">Team</button>
+          </nav>
+
+          <section id="workspace-view-overview" class="workspace-view active">
+            <div class="stats-row">
+              <article class="glass stat-card"><span>Neu</span><strong id="stat-new">0</strong></article>
+              <article class="glass stat-card"><span>In Bearbeitung</span><strong id="stat-confirmed">0</strong></article>
+              <article class="glass stat-card"><span>Abgeschlossen</span><strong id="stat-resolved">0</strong></article>
+              <article class="glass stat-card"><span>Archiviert</span><strong id="stat-cancelled">0</strong></article>
+            </div>
+
+            <div class="overview-grid">
+              <section class="glass card-block emphasis-block">
+                <div class="section-head compact">
+                  <div>
+                    <span class="section-kicker">Heute im Fokus</span>
+                    <h3 id="focus-headline">Ruhiger Überblick für den Tag</h3>
+                  </div>
+                  <button id="export-summary" class="ghost-button">Tagesübersicht exportieren</button>
+                </div>
+                <div class="insights-grid">
+                  <article class="insight-tile">
+                    <span>Offene Fälle</span>
+                    <strong id="insight-open">0</strong>
+                    <small>brauchen Aufmerksamkeit</small>
+                  </article>
+                  <article class="insight-tile">
+                    <span>Hohe Priorität</span>
+                    <strong id="insight-high">0</strong>
+                    <small>sollte zuerst bearbeitet werden</small>
+                  </article>
+                  <article class="insight-tile">
+                    <span>Nächster Termin</span>
+                    <strong id="insight-next">—</strong>
+                    <small>nächste geplante Begegnung</small>
+                  </article>
+                </div>
+              </section>
+
+              <section class="glass card-block">
+                <div class="section-head compact">
+                  <div>
+                    <span class="section-kicker">Benachrichtigungen</span>
+                    <h3>Was Ihre Aufmerksamkeit braucht</h3>
+                  </div>
+                  <button id="clear-notifications" class="ghost-button">Leeren</button>
+                </div>
+                <div id="notification-list" class="notification-list"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="workspace-view-cases" class="workspace-view">
+            <div class="workspace-grid">
+              <section class="glass card-block bookings-block">
+                <div class="toolbar-row">
+                  <div>
+                    <span class="section-kicker">Fallmanagement</span>
+                    <h3>Alle Anfragen und Fälle</h3>
+                  </div>
+                  <div class="toolbar-controls">
+                    <input id="booking-search" placeholder="Suchen nach Name, Team, Kategorie oder Zuständigkeit" />
+                    <select id="booking-filter">
+                      <option value="all">Alle Status</option>
+                      <option value="new">Neu</option>
+                      <option value="confirmed">In Bearbeitung</option>
+                      <option value="resolved">Abgeschlossen</option>
+                      <option value="cancelled">Archiviert</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="booking-list" class="booking-list"></div>
+              </section>
+
+              <aside class="right-column">
+                <section class="glass card-block quick-actions-block">
+                  <span class="section-kicker">Quick Actions</span>
+                  <h3>Sofort handeln</h3>
+                  <div class="quick-actions-grid">
+                    <button id="create-sample-case" class="ghost-button">Beispiel-Fall anlegen</button>
+                    <button id="export-cases" class="ghost-button">Fallliste exportieren</button>
+                    <button id="focus-high-priority" class="ghost-button">Hohe Priorität filtern</button>
+                  </div>
+                </section>
+
+                <section class="glass card-block">
+                  <div class="section-head compact">
+                    <div>
+                      <span class="section-kicker">Galerie Verwaltung</span>
+                      <h3>Fotos für Team und Kommunikation</h3>
+                    </div>
+                  </div>
+                  <form id="gallery-form" class="stack compact-form">
+                    <label>
+                      <span>Titel</span>
+                      <input name="title" placeholder="Mediationstag" required />
+                    </label>
+                    <label>
+                      <span>Bilddatei</span>
+                      <input type="file" name="imageFile" accept="image/*" />
+                    </label>
+                    <label>
+                      <span>oder Bild-URL</span>
+                      <input name="imageUrl" placeholder="https://..." />
+                    </label>
+                    <button type="submit">Bild speichern</button>
+                  </form>
+                </section>
+              </aside>
+            </div>
+          </section>
+
+          <section id="workspace-view-calendar" class="workspace-view">
+            <div class="workspace-grid single-main">
+              <section class="glass card-block">
+                <div class="section-head compact">
+                  <div>
+                    <span class="section-kicker">Kalender</span>
+                    <h3>Termine und Raumplanung</h3>
+                  </div>
+                </div>
+                <div id="calendar-grid" class="calendar-grid"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="workspace-view-team" class="workspace-view">
+            <div class="workspace-grid">
+              <section class="glass card-block">
+                <div class="section-head compact">
+                  <div>
+                    <span class="section-kicker">Team Board</span>
+                    <h3>Rollen und Verantwortung</h3>
+                  </div>
+                </div>
+                <div id="team-board" class="team-board"></div>
+              </section>
+
+              <aside class="right-column">
+                <section class="glass card-block">
+                  <span class="section-kicker">Einsatzlogik</span>
+                  <h3>Wer sieht was?</h3>
+                  <ul class="clean-list">
+                    <li><strong>Admin</strong>: Verwaltung, Archiv, Galerie, Export und Teamsteuerung</li>
+                    <li><strong>Lehrkraft</strong>: eigene oder neue Fälle sehen, übernehmen und begleiten</li>
+                    <li><strong>Mediator</strong>: zugewiesene Fälle moderieren und Lösungen dokumentieren</li>
+                  </ul>
+                </section>
+                <section class="glass card-block">
+                  <span class="section-kicker">Team hinzufügen</span>
+                  <h3>Rolle lokal anlegen</h3>
+                  <form id="team-form" class="stack compact-form">
+                    <label><span>Name</span><input name="name" placeholder="Anna Beispiel" required /></label>
+                    <label><span>E-Mail</span><input type="email" name="email" placeholder="anna@schule.de" required /></label>
+                    <label><span>Passwort</span><input name="password" placeholder="Sicheres Passwort" required /></label>
+                    <label><span>Rolle</span>
+                      <select name="role">
+                        <option value="teacher">Lehrkraft</option>
+                        <option value="mediator">Mediator</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                    </label>
+                    <button type="submit">Mitglied anlegen</button>
+                  </form>
+                </section>
+                <section class="glass card-block">
+                  <span class="section-kicker">Launch Guide</span>
+                  <h3>In wenigen Schritten live</h3>
+                  <ol class="steps-list compact-steps">
+                    <li>Firebase-Projekt anlegen</li>
+                    <li>Auth, Firestore und Storage aktivieren</li>
+                    <li><code>firebase-config.js</code> füllen</li>
+                    <li>Regeln aus den Dateien übernehmen</li>
+                    <li>Auf GitHub Pages, Netlify oder Vercel veröffentlichen</li>
+                  </ol>
+                </section>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
